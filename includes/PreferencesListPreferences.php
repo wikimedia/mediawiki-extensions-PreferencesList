@@ -23,18 +23,18 @@
  * @author Ike Hecht <tosfos@yahoo.com>
  */
 class PreferencesListPreferences {
-	static private $preferenceLocations = [];
+	private static $preferenceLocations = [];
 
 	/**
 	 * A list of preference functions called in Preferences::getPreferences(), plus hookPreferences
 	 *
 	 * @var array
 	 */
-	static private $preferenceFunctions = [ 'profilePreferences', 'skinPreferences',
+	private static $preferenceFunctions = [ 'profilePreferences', 'skinPreferences',
 		'datetimePreferences', 'filesPreferences', 'renderingPreferences',
 		'editingPreferences', 'rcPreferences', 'watchlistPreferences',
 		'searchPreferences', 'miscPreferences', 'hookPreferences' ];
-	static private $desiredPreferenceLocations;
+	private static $desiredPreferenceLocations;
 
 	/**
 	 * Gets the desired Preferences for the user requested.
