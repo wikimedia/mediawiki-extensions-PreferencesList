@@ -5,7 +5,6 @@
 		]
 	},
 	"preferenceslist-desc": "{{desc|name=PreferencesList|url=https://www.mediawiki.org/wiki/Extension:PreferencesList }}",
-	"preferenceslist-i18n-welcome": "Used to greet the user when reading the i18n/??.json file.",
 	"preferenceslist-preferenceslist": "Page title of the PreferencesList special page.",
 	"preferenceslist-preferenceslist-intro": "Text displayed as an intorduction on the PreferencesList SpecialPage.",
 	"preferenceslist": "Text of the link to the PreferencesList special page on SpecialPages.",
