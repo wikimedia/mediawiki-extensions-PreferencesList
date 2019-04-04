@@ -6,5 +6,7 @@
 	},
 	"preferenceslist-preferenceslist": "Lëscht vun den Astellungen",
 	"preferenceslist": "Lëscht vun den Astellungen",
-	"preferenceslist-csv": "Als csv eroflueden"
+	"action-preferenceslist": "all Benotzerastellungen opzielen",
+	"preferenceslist-csv": "Als csv eroflueden",
+	"preferenceslist-nofields": "Et si keng Felder ausgewielt."
 }
