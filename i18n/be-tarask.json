@@ -9,5 +9,6 @@
 	"preferenceslist-preferenceslist-intro": "Ніжэй знаходзіцца сьпіс перавагаў. Абярыце адну ці болей, каб пабачыць сьпіс усіх удзельнікаў з такой перавагай.",
 	"preferenceslist": "Сьпіс перавагаў",
 	"action-preferenceslist": "прагляд сьпісу перавагаў удзельнікаў",
-	"preferenceslist-csv": "Спампаваць як CSV"
+	"preferenceslist-csv": "Спампаваць як CSV",
+	"preferenceslist-nofields": "Палі не абраныя."
 }
