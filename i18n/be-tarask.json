@@ -10,5 +10,6 @@
 	"preferenceslist": "Сьпіс перавагаў",
 	"action-preferenceslist": "прагляд сьпісу перавагаў удзельнікаў",
 	"preferenceslist-csv": "Спампаваць як CSV",
-	"preferenceslist-nofields": "Палі не абраныя."
+	"preferenceslist-nofields": "Палі не абраныя.",
+	"right-preferenceslist": "Адкрываць старонку Special:PreferencesList"
 }
