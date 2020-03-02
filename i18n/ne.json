@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"हिमाल सुबेदी"
+			"हिमाल सुबेदी",
+			"पर्वत सुबेदी"
 		]
 	},
+	"preferenceslist-preferenceslist": "प्राथमिकता सूची",
+	"preferenceslist": "प्राथमिकता सूची",
 	"preferenceslist-csv": "सिएसभीकाे रूपमा डाउनलोड गरिएकाे"
 }
