@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"tosfos",
-			"Beta16"
+			"Beta16",
+			"tosfos"
 		]
 	},
 	"preferenceslist-desc": "{{desc|name=PreferencesList|url=https://www.mediawiki.org/wiki/Extension:PreferencesList }}",
