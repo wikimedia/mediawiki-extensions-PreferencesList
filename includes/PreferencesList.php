@@ -24,23 +24,21 @@
  */
 class PreferencesList {
 	/**
+	 * Display options
+	 */
+	const CSV = 1;
+	const TABLE = 2;
+	/**
 	 *
 	 * @var IContextSource
 	 */
 	protected $context;
-
 	/**
 	 * List of all preferences in the wiki in Form Field style
 	 *
 	 * @var array
 	 */
 	protected $allPreferences;
-
-	/**
-	 * Display options
-	 */
-	const CSV = 1;
-	const TABLE = 2;
 
 	/**
 	 * Constructor
@@ -54,49 +52,10 @@ class PreferencesList {
 	}
 
 	/**
-	 * Fetch the Preferences for all Users in the wiki, and return a Form Fields style array
-	 *
-	 * @param array $preferenceNames
-	 * @param IContextSource $context
-	 * @return array
-	 */
-	private static function getAllUsersPreferences( array $preferenceNames, IContextSource $context ) {
-		$dbr = wfGetDB( DB_REPLICA );
-		$res = $dbr->select(
-			'user', User::selectFields(), '', __METHOD__
-		);
-		$users = new UserArrayFromResult( $res );
-		$preferencesArray = [];
-		foreach ( $users as $user ) {
-			$thisUsersPreferences = PreferencesListPreferences::getPreferences( $user, $preferenceNames,
-					$context );
-			foreach ( $preferenceNames as $preferenceName ) {
-				// For some reason this is not always set. If it isn't, assume 0.
-				if ( isset( $thisUsersPreferences[$preferenceName]['default'] ) ) {
-					$preferencesArray[
-						$user->getName()][$preferenceName] = $thisUsersPreferences[$preferenceName]['default'];
-				} else {
-					$preferencesArray[$user->getName()][$preferenceName] = 0;
-				}
-			}
-			/** @todo is it safe to use User Name as Key? Maybe ID would be better. */
-		}
-		return $preferencesArray;
-	}
-
-	/**
-	 * Get a list of preference fields that should not be displayed in the Preferences List
-	 *
-	 * @return array
-	 */
-	protected function getSkipFields() {
-		return [ 'username', 'csv', 'password', 'emailauthentication', 'editwatchlist' ];
-	}
-
-	/**
 	 * Based on the FormOptions, send back an array of Form Fields
 	 *
 	 * @param FormOptions $opts
+	 *
 	 * @return array
 	 */
 	public function getFormFields( FormOptions $opts ) {
@@ -121,12 +80,23 @@ class PreferencesList {
 				}
 			}
 
-			if ( isset( $preferencesField['label'] ) && $preferencesField['label'] == '&#160;' ) {
+			if ( !isset( $preferencesField['label-message'] ) &&
+				 ( ( isset( $preferencesField['label'] ) && $preferencesField['label'] == '&#160;' ) ||
+				   ( isset( $preferencesField['type'] ) && $preferencesField['type'] == 'radio' ) ) ) {
 				// If the label is not set, use this preference's subsection as its label
 				$sectionInfo = explode( '/', $preferencesField['section'] );
 				/** @todo Use this skin's prefix */
-				$formFields[$key]['label-message'] = 'prefs-' . $sectionInfo[1];
+				if ( count( $sectionInfo ) > 1 ) {
+					$formFields[$key]['label-message'] = 'prefs-' . $sectionInfo[1];
+				} else {
+					$formFields[$key]['label-message'] = 'prefs-' . $sectionInfo[0];
+				}
 			}
+
+			if ( isset( $preferencesField['default'] ) && $preferencesField['default'] instanceof OOUI\FieldLayout ) {
+				$formFields[$key]['label'] = $preferencesField['default']->getLabel();
+			}
+
 		}
 
 		// Add a CSV checkbox. This isn't a Preference.
@@ -136,9 +106,111 @@ class PreferencesList {
 	}
 
 	/**
+	 * Get a list of preference fields that should not be displayed in the Preferences List
+	 *
+	 * @return array
+	 */
+	protected function getSkipFields() {
+		return [ 'username', 'csv', 'password', 'emailauthentication', 'editwatchlist' ];
+	}
+
+	/**
+	 * Get a report of user names with their preferences
+	 *
+	 * @param array $preferencesToShow
+	 * @param int $format One of the class integer constants
+	 * @param IContextSource $context
+	 *
+	 * @return string|bool
+	 */
+	public function getResults( array $preferencesToShow, $format, IContextSource $context ) {
+		$allUsersPreferences = self::getAllUsersPreferences(
+			$preferencesToShow,
+			$context,
+			$format
+		);
+
+		if ( $format === self::CSV ) {
+			return $this->downloadCSV( $allUsersPreferences );
+		} elseif ( $format === self::TABLE ) {
+			return $this->getTable( $allUsersPreferences );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Fetch the Preferences for all Users in the wiki, and return a Form Fields style array
+	 *
+	 * @param array $preferenceNames
+	 * @param IContextSource $context
+	 * @param int $format
+	 *
+	 * @return array
+	 * @throws MWException
+	 */
+	private static function getAllUsersPreferences(
+		array $preferenceNames,
+		IContextSource $context,
+		$format = self::TABLE
+	) {
+		$dbr = wfGetDB( DB_REPLICA );
+
+		$res = $dbr->select(
+			'user',
+			'user_id',
+			'',
+			__METHOD__
+		);
+
+		$preferencesArray = [];
+
+		while ( $row = $res->fetchRow() ) {
+			$user = User::newFromId( $row['user_id'] );
+			$thisUsersPreferences = PreferencesListPreferences::getPreferences(
+				$user,
+				$preferenceNames,
+				$context,
+				$format
+			);
+			foreach ( $preferenceNames as $preferenceName ) {
+				// For some reason this is not always set. If it isn't, assume 0.
+				if ( isset( $thisUsersPreferences[$preferenceName]['default'] ) ) {
+					$preferencesArray[$user->getName()][$preferenceName] =
+						self::processValue( $thisUsersPreferences[$preferenceName]['default'], $format );
+				} else {
+					$preferencesArray[$user->getName()][$preferenceName] = 0;
+				}
+				/** @todo is it safe to use User Name as Key? Maybe ID would be better. */
+			}
+			unset( $thisUsersPreferences );
+			unset( $user );
+			unset( $row );
+		}
+
+		$res->free();
+
+		return $preferencesArray;
+	}
+
+	/**
+	 * @param string $value Value to process
+	 * @param int $format Output format
+	 *
+	 * @return string
+	 */
+	protected static function processValue( $value, $format ) {
+		if ( $format === self::CSV ) {
+			$value = strip_tags( $value );
+		}
+		return $value;
+	}
+
+	/**
 	 * Download a CSV of the results
 	 *
 	 * @param array $allUsersPreferences The data to be displayed
+	 *
 	 * @return bool
 	 */
 	protected function downloadCSV( array $allUsersPreferences ) {
@@ -163,6 +235,7 @@ class PreferencesList {
 	 * the first row
 	 *
 	 * @param array $allUsersPreferences Preferences to be displayed
+	 *
 	 * @return array
 	 */
 	private function getRows( array $allUsersPreferences ) {
@@ -183,6 +256,7 @@ class PreferencesList {
 	 *
 	 * @param string $userPref What this preference was set to
 	 * @param string $preferenceKey
+	 *
 	 * @return string
 	 */
 	protected function formatText( $userPref, $preferenceKey ) {
@@ -211,7 +285,9 @@ class PreferencesList {
 
 	/**
 	 * Show the subpage with correct preferences
+	 *
 	 * @param array $allUsersPreferences
+	 *
 	 * @return string
 	 */
 	protected function getTable( array $allUsersPreferences ) {
@@ -221,8 +297,11 @@ class PreferencesList {
 
 		$html .= Html::openElement( 'tr' );
 		foreach ( $rows[0] as $label ) {
-			$labelText = PreferencesListUtils::getMessage( $label, $this->allPreferences[$label],
-					$this->context );
+			$labelText = PreferencesListUtils::getMessage(
+				$label,
+				$this->allPreferences[$label],
+				$this->context
+			);
 			$html .= Html::rawElement( 'th', [], $labelText );
 		}
 		$html .= Html::closeElement( 'tr' );
@@ -239,24 +318,5 @@ class PreferencesList {
 		$html .= Html::closeElement( 'table' );
 
 		return $html;
-	}
-
-	/**
-	 * Get a report of user names with their preferences
-	 *
-	 * @param array $preferencesToShow
-	 * @param int $format One of the class integer constants
-	 * @param IContextSource $context
-	 * @return string|bool
-	 */
-	public function getResults( array $preferencesToShow, $format, IContextSource $context ) {
-		$allUsersPreferences = self::getAllUsersPreferences(
-				$preferencesToShow, $context );
-
-		if ( $format === self::CSV ) {
-			return $this->downloadCSV( $allUsersPreferences );
-		} elseif ( $format === self::TABLE ) {
-			return $this->getTable( $allUsersPreferences );
-		}
 	}
 }

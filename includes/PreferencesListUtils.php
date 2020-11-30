@@ -17,12 +17,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Preferences\DefaultPreferencesFactory;
+
 /**
  * Some utilities for PreferencesList
  *
  * @author Ike Hecht <tosfos@yahoo.com>
  */
 class PreferencesListUtils {
+
 	/**
 	 * Convert an array to a CSV
 	 * From https://stackoverflow.com/a/16251849
@@ -33,7 +39,10 @@ class PreferencesListUtils {
 	 * @param string $delimiter
 	 */
 	public static function arrayToCsvDownload(
-	array $array, $filename = 'export.csv', $delimiter = ';' ) {
+		array $array,
+		$filename = 'export.csv',
+		$delimiter = ';'
+	) {
 		/** @todo Should the filename get i18n? */
 		header( 'Content-Type: application/csv' );
 		header( 'Content-Disposition: attachment; filename="' . $filename . '";' );
@@ -52,6 +61,7 @@ class PreferencesListUtils {
 	 * @param string $key
 	 * @param array $params
 	 * @param IContextSource $context
+	 *
 	 * @return string
 	 */
 	public static function getMessage( $key, array $params, IContextSource $context ) {
@@ -80,4 +90,49 @@ class PreferencesListUtils {
 		}
 		return '';
 	}
+
+	/**
+	 * @param User $user
+	 * @param IContextSource $context
+	 * @param int $format
+	 *
+	 * @return mixed|mixed[][]
+	 * @throws MWException
+	 */
+	public static function getPreferences( $user, IContextSource $context, $format = PreferencesList::TABLE ) {
+		// if ( empty( self::$preferencesCache ) || !isset( self::$preferencesCache[$user->getId()] ) ) {
+		//	$preferencesFactory = MediaWikiServices::getInstance()->getPreferencesFactory();
+		//	self::$preferencesCache[$user->getId()] = $preferencesFactory->getFormDescriptor( $user, $context );
+		//}
+		//return self::$preferencesCache[$user->getId()];
+
+		$services = MediaWikiServices::getInstance();
+		if ( $format === PreferencesList::CSV ) {
+			$factory = new DefaultPreferencesFactory(
+				new ServiceOptions(
+					DefaultPreferencesFactory::CONSTRUCTOR_OPTIONS, $services->getMainConfig()
+				),
+				$services->getContentLanguage(),
+				$services->getAuthManager(),
+				new FakeLinkRenderer(
+					$services->getTitleFormatter(),
+					$services->getLinkCache(),
+					$services->getNamespaceInfo(),
+					$services->getSpecialPageFactory(),
+					$services->getHookContainer()
+				),
+				$services->getNamespaceInfo(),
+				$services->getPermissionManager(),
+				$services->getLanguageConverterFactory()->getLanguageConverter(),
+				$services->getLanguageNameUtils(),
+				$services->getHookContainer()
+			);
+			$factory->setLogger( LoggerFactory::getInstance( 'preferences' ) );
+		} else {
+			$factory = $services->getPreferencesFactory();
+		}
+
+		return $factory->getFormDescriptor( $user, $context );
+	}
+
 }

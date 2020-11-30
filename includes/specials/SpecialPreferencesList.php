@@ -62,11 +62,12 @@ class SpecialPreferencesList extends SpecialPage {
 		$this->subpage = $subpage;
 
 		$out = $this->getOutput();
+		$out->addModules( 'ext.preferenceslist' );
 
 		$out->setPageTitle( $this->msg( 'preferenceslist-preferenceslist' ) );
 		// Use the current user's info to figure out which fields are usually shown on the
 		// Special:Preferences page
-		$this->allPreferences = Preferences::getPreferences( $this->getUser(), $this->getContext() );
+		$this->allPreferences = PreferencesListUtils::getPreferences( $this->getUser(), $this->getContext() );
 
 		$this->preferencesList = new PreferencesList( $this->getContext(), $this->allPreferences );
 		$formFields = $this->preferencesList->getFormFields( $this->getOptions() );
@@ -79,57 +80,16 @@ class SpecialPreferencesList extends SpecialPage {
 		// Is there a better way to do this?
 		if ( !$this->getRequest()->getVal( 'submitted' ) ) {
 			$out->addWikiMsg( 'preferenceslist-preferenceslist-intro' );
+			$htmlForm->prepareForm();
+			$out->addHTML( '<div class="form-pref-list">' );
 			$htmlForm->displayForm( '' );
+			$out->addHTML( '</div>' );
 		} else {
 			$htmlForm->loadData();
 			$htmlForm->trySubmit();
 			$out->addHTML( $this->resultMessage );
 			$out->addReturnTo( SpecialPage::getTitleFor( 'PreferencesList' ) );
 		}
-	}
-
-	/**
-	 * Do Submit
-	 *
-	 * @param array $formData
-	 * @param HTMLForm $form
-	 * @return bool
-	 */
-	public function tryUISubmit( $formData, HTMLForm $form ) {
-		// Special handling for the CSV field, which is not a preference
-		$showCSV = $formData['csv'];
-		unset( $formData['csv'] );
-
-		// Remove false values
-		$filteredFormData = array_filter( $formData );
-		$preferencesToShow = array_keys( $filteredFormData );
-
-		if ( empty( $preferencesToShow ) ) {
-			$this->resultMessage = $this->msg( 'preferenceslist-nofields' );
-			return false;
-		}
-
-		if ( $showCSV ) {
-			$this->getOutput()->disable();
-			$this->preferencesList->getResults(
-				$preferencesToShow, PreferencesList::CSV, $form->getContext() );
-			return true;
-		} else {
-			$this->resultMessage = $this->preferencesList->getResults( $preferencesToShow,
-				PreferencesList::TABLE, $form->getContext() );
-			return true;
-		}
-
-		// We should never get here.
-		return false;
-	}
-
-	/**
-	 * Returns group name
-	 * @return string
-	 */
-	protected function getGroupName() {
-		return 'users';
 	}
 
 	/**
@@ -161,5 +121,56 @@ class SpecialPreferencesList extends SpecialPage {
 		$opts->add( 'csv', false );
 
 		return $opts;
+	}
+
+	/**
+	 * Do Submit
+	 *
+	 * @param array $formData
+	 * @param HTMLForm $form
+	 *
+	 * @return bool
+	 */
+	public function tryUISubmit( $formData, HTMLForm $form ) {
+		// Special handling for the CSV field, which is not a preference
+		$showCSV = $formData['csv'];
+		unset( $formData['csv'] );
+
+		// Remove false values
+		$filteredFormData = array_filter( $formData );
+		$preferencesToShow = array_keys( $filteredFormData );
+
+		if ( empty( $preferencesToShow ) ) {
+			$this->resultMessage = $this->msg( 'preferenceslist-nofields' );
+			return false;
+		}
+
+		if ( $showCSV ) {
+			$this->getOutput()->disable();
+			$this->preferencesList->getResults(
+				$preferencesToShow,
+				PreferencesList::CSV,
+				$form->getContext()
+			);
+			return true;
+		} else {
+			$this->resultMessage = $this->preferencesList->getResults(
+				$preferencesToShow,
+				PreferencesList::TABLE,
+				$form->getContext()
+			);
+			return true;
+		}
+
+		// We should never get here.
+		return false;
+	}
+
+	/**
+	 * Returns group name
+	 * @return string
+	 */
+	protected function getGroupName() {
+		return 'users';
 	}
 }
