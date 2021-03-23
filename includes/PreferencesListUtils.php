@@ -125,7 +125,8 @@ class PreferencesListUtils {
 				$services->getPermissionManager(),
 				$services->getLanguageConverterFactory()->getLanguageConverter(),
 				$services->getLanguageNameUtils(),
-				$services->getHookContainer()
+				$services->getHookContainer(),
+				$services->getUserOptionsLookup()
 			);
 			$factory->setLogger( LoggerFactory::getInstance( 'preferences' ) );
 		} else {
