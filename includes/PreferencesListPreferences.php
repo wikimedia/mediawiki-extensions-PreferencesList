@@ -46,7 +46,7 @@ class PreferencesListPreferences {
 		// Discard the unneeded preference fields
 		$filteredPreferences = array_filter(
 			$defaultPreferences,
-			function ( $key ) use ( $desiredPref ) {
+			static function ( $key ) use ( $desiredPref ) {
 				return in_array( $key, $desiredPref );
 			},
 			ARRAY_FILTER_USE_KEY
