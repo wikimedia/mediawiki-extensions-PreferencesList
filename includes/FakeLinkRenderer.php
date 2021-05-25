@@ -10,13 +10,13 @@ class FakeLinkRenderer extends LinkRenderer {
 
 	/**
 	 * @param LinkTarget $target
-	 * @param null $text
+	 * @param string|null $text
 	 * @param array $extraAttribs
 	 * @param array $query
 	 *
-	 * @return mixed|null
+	 * @return string|null
 	 */
-	public function makeLink( LinkTarget $target, $text = null, array $extraAttribs = [], array $query = [] ) {
+	public function makeLink( $target, $text = null, array $extraAttribs = [], array $query = [] ) {
 		return $text;
 	}
 

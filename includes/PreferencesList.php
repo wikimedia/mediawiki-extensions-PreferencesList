@@ -240,6 +240,7 @@ class PreferencesList {
 	 */
 	private function getRows( array $allUsersPreferences ) {
 		// Create the header row
+		// @phan-suppress-next-line PhanUndeclaredVariableDim
 		$rows[0] = array_keys( reset( $allUsersPreferences ) );
 		array_unshift( $rows[0], 'username' );
 
