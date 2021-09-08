@@ -152,18 +152,14 @@ class SpecialPreferencesList extends SpecialPage {
 				PreferencesList::CSV,
 				$form->getContext()
 			);
-			return true;
 		} else {
 			$this->resultMessage = $this->preferencesList->getResults(
 				$preferencesToShow,
 				PreferencesList::TABLE,
 				$form->getContext()
 			);
-			return true;
 		}
-
-		// We should never get here.
-		return false;
+		return true;
 	}
 
 	/**
