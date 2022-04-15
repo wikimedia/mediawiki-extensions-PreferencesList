@@ -1,4 +1,5 @@
 {
+	"name": "PreferencesList",
 	"private": true,
 	"scripts": {
 		"test": "grunt test"
