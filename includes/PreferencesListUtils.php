@@ -18,6 +18,7 @@
  */
 
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Preferences\DefaultPreferencesFactory;
@@ -117,9 +118,9 @@ class PreferencesListUtils {
 				new FakeLinkRenderer(
 					$services->getTitleFormatter(),
 					$services->getLinkCache(),
-					$services->getNamespaceInfo(),
 					$services->getSpecialPageFactory(),
-					$services->getHookContainer()
+					$services->getHookContainer(),
+					new ServiceOptions( LinkRenderer::CONSTRUCTOR_OPTIONS, [ 'renderForComment' => false ] )
 				),
 				$services->getNamespaceInfo(),
 				$services->getPermissionManager(),
