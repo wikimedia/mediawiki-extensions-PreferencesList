@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"preferenceslist-desc": "Ustvari seznam vseh uporabniških nastavitev za določeno prilagoditev",
+	"preferenceslist-preferenceslist": "Seznam prilagoditev",
+	"preferenceslist-preferenceslist-intro": "Spodaj je seznam prilagoditev. Izberite eno ali več za ogled seznama vseh upoarbnikov z njihovimi prilagoditvami.",
+	"preferenceslist": "Seznam prilagoditev",
+	"action-preferenceslist": "navajanje prilagoditev vseh uporabnikov",
+	"preferenceslist-csv": "Prenesi kot CSV",
+	"preferenceslist-nofields": "Izbrano ni bilo nobeno polje.",
+	"right-preferenceslist": "Odpiranje strani Special:PreferencesList"
+}
