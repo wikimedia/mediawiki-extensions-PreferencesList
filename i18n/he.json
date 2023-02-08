@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80"
+		]
+	},
+	"preferenceslist-desc": "יצירת רשימה של כל הגדרות המשתמש עבור העדפה מסוימת",
+	"preferenceslist-preferenceslist": "רשימת העדפות",
+	"preferenceslist-preferenceslist-intro": "להלן רשימת העדפות. יש לבחור אחת או יותר כדי לראות רשימה של כל המשתמשים עם העדפותיהם.",
+	"preferenceslist": "רשימת העדפות",
+	"action-preferenceslist": "רשימת ההעדפות של כל המשתמשים",
+	"preferenceslist-csv": "הורדה כקובץ CSV",
+	"preferenceslist-nofields": "לא נבחרו שדות.",
+	"right-preferenceslist": "פתיחת הדף Special:PreferencesList"
+}
