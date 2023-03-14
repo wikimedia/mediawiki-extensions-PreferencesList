@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
 	"preferenceslist-preferenceslist": "Lëscht vun den Astellungen",
 	"preferenceslist": "Lëscht vun den Astellungen",
 	"action-preferenceslist": "all Benotzerastellungen opzielen",
-	"preferenceslist-csv": "Als csv eroflueden",
+	"preferenceslist-csv": "Als CSV eroflueden",
 	"preferenceslist-nofields": "Et si keng Felder ausgewielt."
 }
