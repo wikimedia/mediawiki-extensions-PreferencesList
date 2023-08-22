@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nokeoo"
+		]
+	},
+	"preferenceslist-desc": "Sugeneruoja visų tam tikros nuostatos naudotojo nustatymų sąrašą",
+	"preferenceslist-preferenceslist": "Nuostatų sąrašas",
+	"preferenceslist-preferenceslist-intro": "Žemiau pateikiamas nuostatų sąrašas. Pasirinkite vieną ar daugiau, kad pamatytumėte visų naudotojų sąrašą su jūsų nuostata.",
+	"preferenceslist": "Nuostatų sąrašas",
+	"action-preferenceslist": "išvardyti visų naudotojų nuostatas",
+	"preferenceslist-csv": "Atsisiųsti kaip CSV",
+	"preferenceslist-nofields": "Nėra pasirinktų laukų.",
+	"right-preferenceslist": "Atidaryti Special:PreferencesList puslapį"
+}
