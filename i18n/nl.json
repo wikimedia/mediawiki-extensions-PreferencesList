@@ -1,8 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mainframe98"
+			"Mainframe98",
+			"McDutchie"
 		]
 	},
-	"preferenceslist-csv": "Downloaden als CSV"
+	"preferenceslist-desc": "Genereert een lijst met alle gebruikersinstellingen voor een bepaalde voorkeur",
+	"preferenceslist-preferenceslist": "Voorkeurenlijst",
+	"preferenceslist-preferenceslist-intro": "Hieronder staat een lijst met voorkeuren. Kies er een of meer om een lijst te zien van alle gebruikers met hun voorkeur.",
+	"preferenceslist": "Voorkeurenlijst",
+	"action-preferenceslist": "de voorkeuren van alle gebruikers weer te geven",
+	"preferenceslist-csv": "Downloaden als CSV",
+	"preferenceslist-nofields": "Er zijn geen velden geselecteerd.",
+	"right-preferenceslist": "De pagina Special:PreferencesList openen"
 }
