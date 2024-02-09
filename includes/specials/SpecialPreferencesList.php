@@ -140,7 +140,7 @@ class SpecialPreferencesList extends SpecialPage {
 		$filteredFormData = array_filter( $formData );
 		$preferencesToShow = array_keys( $filteredFormData );
 
-		if ( empty( $preferencesToShow ) ) {
+		if ( !$preferencesToShow ) {
 			$this->resultMessage = $this->msg( 'preferenceslist-nofields' );
 			return false;
 		}
