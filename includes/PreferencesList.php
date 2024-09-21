@@ -17,6 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Description of PreferencesList
  *
@@ -154,7 +156,7 @@ class PreferencesList {
 		IContextSource $context,
 		$format = self::TABLE
 	) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 
 		$res = $dbr->select(
 			'user',
