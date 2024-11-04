@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"沈澄心"
+		]
+	},
+	"preferenceslist-desc": "生成特定参数设置的所有用户设置列表",
+	"preferenceslist-preferenceslist": "参数设置列表",
+	"preferenceslist-preferenceslist-intro": "以下是参数设置列表。请选择一个或多个来查看带有相关参数设置的所有用户列表。",
+	"preferenceslist": "参数设置列表",
+	"action-preferenceslist": "列出所有用户的参数设置",
+	"preferenceslist-csv": "下载为CSV",
+	"preferenceslist-nofields": "未选择任何字段。",
+	"right-preferenceslist": "打开Special:PreferencesList页面"
+}
