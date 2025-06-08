@@ -1,7 +1,9 @@
 <?php
 
 use MediaWiki\Linker\LinkRenderer;
-use MediaWiki\Linker\LinkTarget;
+use MediaWiki\Page\PageReference;
+use Wikimedia\HtmlArmor\HtmlArmor;
+use Wikimedia\Parsoid\Core\LinkTarget;
 
 /**
  * Class FakeLinkRenderer
@@ -9,15 +11,14 @@ use MediaWiki\Linker\LinkTarget;
 class FakeLinkRenderer extends LinkRenderer {
 
 	/**
-	 * @param LinkTarget $target
-	 * @param string|null $text
+	 * @param PageReference|LinkTarget $target
+	 * @param HtmlArmor|null|string $text
 	 * @param array $extraAttribs
 	 * @param array $query
 	 *
-	 * @return string|null
+	 * @return string
 	 */
-	public function makeLink( $target, $text = null, array $extraAttribs = [], array $query = [] ) {
-		return $text;
+	public function makeLink( $target, $text = null, array $extraAttribs = [], array $query = [] ): string {
+		return (string)$text;
 	}
-
 }
