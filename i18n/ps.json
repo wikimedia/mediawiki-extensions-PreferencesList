@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"شاه زمان پټان"
+		]
+	},
+	"preferenceslist-desc": "د يو ځانگړي غوره‌توب لپاره د کارن ټول‌اوڼنو لړليک رامنځته کوي",
+	"preferenceslist-preferenceslist": "غوره‌توبونو لړليک",
+	"preferenceslist-preferenceslist-intro": "لاندې د غوره‌توبونو لړليک دی.\nيو يا څو يې وټاکئ؛ ترڅو د ټولو کارنانو لړليک د هغوی غوره‌توبونو سره وگورئ.",
+	"preferenceslist": "غوره‌توبوتو لړليک",
+	"action-preferenceslist": "د ټولو کارنانو غوره‌توبونه لړليک کول",
+	"preferenceslist-csv": "د سي‌اېس‌وي په بڼه راکښته‌کول",
+	"preferenceslist-nofields": "هېڅ ډگر نه دی ټاکل شوی.",
+	"right-preferenceslist": "Special:PreferencesList مخ پرانيستل"
+}
