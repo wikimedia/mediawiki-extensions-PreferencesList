@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"JeffreyKim"
+			"JeffreyKim",
+			"Ktchankt"
 		]
 	},
 	"preferenceslist-desc": "生成特定偏好設定嘅所有使用者設定清單",
@@ -9,7 +10,7 @@
 	"preferenceslist-preferenceslist-intro": "以下係偏好設定清單。 揀一個或者多個就可以睇到所有用戶嘅清單，同埋佢哋嘅偏好。",
 	"preferenceslist": "偏好清單",
 	"action-preferenceslist": "列出所有用戶嘅偏好設定",
-	"preferenceslist-csv": "以 CSV 形式單撈",
+	"preferenceslist-csv": "以 CSV 形式下載",
 	"preferenceslist-nofields": "冇揀過任何欄位。",
 	"right-preferenceslist": "打開特別：偏好清單頁面"
 }
