@@ -33,7 +33,6 @@ class PreferencesList {
 	const CSV = 1;
 	const TABLE = 2;
 	/**
-	 *
 	 * @var IContextSource
 	 */
 	protected $context;
