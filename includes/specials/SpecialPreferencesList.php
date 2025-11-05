@@ -66,7 +66,7 @@ class SpecialPreferencesList extends SpecialPage {
 		$out = $this->getOutput();
 		$out->addModules( 'ext.preferenceslist' );
 
-		$out->setPageTitle( $this->msg( 'preferenceslist-preferenceslist' ) );
+		$out->setPageTitle( $this->msg( 'preferenceslist-preferenceslist' )->escaped() );
 		// Use the current user's info to figure out which fields are usually shown on the
 		// Special:Preferences page
 		$this->allPreferences = PreferencesListUtils::getPreferences( $this->getUser(), $this->getContext() );
