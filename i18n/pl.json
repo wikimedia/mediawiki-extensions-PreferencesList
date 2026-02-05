@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Woytecr"
+		]
+	},
+	"preferenceslist-desc": "Generuje listę wszystkich wartości ustawień użytkowników dla określonych ustawień",
+	"preferenceslist-preferenceslist": "Lista preferencji",
+	"preferenceslist-preferenceslist-intro": "Poniżej znajduje się lista preferencji. Wybierz jedną lub więcej, aby wyświetlić listę wszystkich użytkowników wraz z ich preferencjami.",
+	"preferenceslist": "Lista preferencji",
+	"action-preferenceslist": "wyświetlania preferencje wszystkich użytkowników",
+	"preferenceslist-csv": "Pobierz jako CSV",
+	"preferenceslist-nofields": "Nie wybrano żadnego pola.",
+	"right-preferenceslist": "Otwarcie strony Special:PreferencesList"
+}
