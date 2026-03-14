@@ -109,19 +109,36 @@ class PreferencesListUtils {
 
 		$services = MediaWikiServices::getInstance();
 		if ( $format === PreferencesList::CSV ) {
+			if ( version_compare( MW_VERSION, '1.46', '>=' ) ) {
+				$fakeLinkRenderer = new FakeLinkRenderer(
+					$services->getTitleFormatter(),
+					$services->getLinkCache(),
+					$services->getSpecialPageFactory(),
+					$services->getHookContainer(),
+					$services->getTempUserConfig(),
+					$services->getTempUserDetailsLookup(),
+					$services->getUserIdentityLookup(),
+					$services->getUserNameUtils(),
+					new ServiceOptions( LinkRenderer::CONSTRUCTOR_OPTIONS, [ 'renderForComment' => false ] )
+				);
+			} else {
+				// @phan-suppress-next-line PhanParamTooFew
+				$fakeLinkRenderer = new FakeLinkRenderer(
+					$services->getTitleFormatter(),
+					$services->getLinkCache(),
+					$services->getSpecialPageFactory(),
+					$services->getHookContainer(),
+					// @phan-suppress-next-line PhanTypeMismatchArgument
+					new ServiceOptions( LinkRenderer::CONSTRUCTOR_OPTIONS, [ 'renderForComment' => false ] )
+				);
+			}
 			$factory = new DefaultPreferencesFactory(
 				new ServiceOptions(
 					DefaultPreferencesFactory::CONSTRUCTOR_OPTIONS, $services->getMainConfig()
 				),
 				$services->getContentLanguage(),
 				$services->getAuthManager(),
-				new FakeLinkRenderer(
-					$services->getTitleFormatter(),
-					$services->getLinkCache(),
-					$services->getSpecialPageFactory(),
-					$services->getHookContainer(),
-					new ServiceOptions( LinkRenderer::CONSTRUCTOR_OPTIONS, [ 'renderForComment' => false ] )
-				),
+				$fakeLinkRenderer,
 				$services->getNamespaceInfo(),
 				$services->getPermissionManager(),
 				$services->getLanguageConverterFactory()->getLanguageConverter(),
