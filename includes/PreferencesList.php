@@ -268,9 +268,9 @@ class PreferencesList {
 		// Make true/false preferences human-readable
 		if ( isset( $preferenceDescriptor['type'] ) && $preferenceDescriptor['type'] === 'toggle' ) {
 			if ( $userPref == '1' ) {
-				return $this->context->msg( 'confirmable-yes' );
+				return $this->context->msg( 'confirmable-yes' )->parse();
 			} else {
-				return $this->context->msg( 'confirmable-no' );
+				return $this->context->msg( 'confirmable-no' )->parse();
 			}
 		}
 
