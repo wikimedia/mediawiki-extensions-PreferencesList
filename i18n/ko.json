@@ -1,9 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Tensama0415"
 		]
 	},
+	"preferenceslist-desc": "특정 환경설정에 대한 모든 사용자 설정 목록을 생성합니다",
+	"preferenceslist-preferenceslist": "환경설정 목록",
+	"preferenceslist-preferenceslist-intro": "아래는 환경설정 목록입니다. 하나 이상을 선택하면 모든 사용자들의 해당 환경설정에 대한 목록을 볼 수 있습니다.",
+	"preferenceslist": "환경설정 목록",
+	"action-preferenceslist": "모든 사용자의 환경설정을 나열할",
 	"preferenceslist-csv": "CSV로 다운로드",
-	"preferenceslist-nofields": "선택된 필드가 없습니다."
+	"preferenceslist-nofields": "선택된 필드가 없습니다.",
+	"right-preferenceslist": "Special:PreferencesList 문서를 열음"
 }
