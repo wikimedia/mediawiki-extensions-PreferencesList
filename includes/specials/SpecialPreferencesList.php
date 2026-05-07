@@ -50,7 +50,12 @@ class SpecialPreferencesList extends SpecialPage {
 	protected $preferencesList;
 
 	public function __construct() {
-		parent::__construct( 'PreferencesList', 'preferenceslist' );
+		parent::__construct( 'PreferencesList' );
+	}
+
+	/** @inheritDoc */
+	public function getRestriction(): string {
+		return 'preferenceslist';
 	}
 
 	/**
