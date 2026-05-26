@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"preferenceslist-desc": "Waxay soo saartaa liis dhammaan dejimaha isticmaalaha ee dooq gaar ah",
+	"preferenceslist-preferenceslist": "Liiska dooqyada",
+	"preferenceslist-preferenceslist-intro": "Hoos waxaa ku yaal liiska dooqyada. Dooro hal ama in ka badan si aad u aragto liiska dhammaan isticmaalayaasha iyo dooqyadooda.",
+	"preferenceslist": "Liiska dooqyada",
+	"action-preferenceslist": "Liiska dhammaan dooqyada isticmaalayaasha",
+	"preferenceslist-csv": "U soo dejiso CSV ahaan",
+	"preferenceslist-nofields": "Ma jiraan goobbo la xushay.",
+	"right-preferenceslist": "Fur bogga Special:PreferencesList"
+}
