@@ -32,26 +32,15 @@ class PreferencesList {
 	 */
 	const CSV = 1;
 	const TABLE = 2;
-	/**
-	 * @var IContextSource
-	 */
-	protected $context;
-	/**
-	 * List of all preferences in the wiki in Form Field style
-	 *
-	 * @var array
-	 */
-	protected $allPreferences;
 
 	/**
-	 * Constructor
-	 *
 	 * @param IContextSource $context
-	 * @param array $allPreferences
+	 * @param array $allPreferences List of all preferences in the wiki in Form Field style
 	 */
-	public function __construct( IContextSource $context, array $allPreferences ) {
-		$this->context = $context;
-		$this->allPreferences = $allPreferences;
+	public function __construct(
+		protected readonly IContextSource $context,
+		protected readonly array $allPreferences,
+	) {
 	}
 
 	/**
