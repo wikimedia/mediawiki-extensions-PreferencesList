@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"preferenceslist-desc": "Generuje zoznam všetkých používateľských nastavení pre konkrétnu predvoľbu",
+	"preferenceslist-preferenceslist": "Zoznam predvolieb",
+	"preferenceslist-preferenceslist-intro": "Nižšie je zoznam predvolieb. Vyberte jednu alebo viac, ak chcete zobraziť zoznam všetkých používateľov s ich nastavením.",
+	"preferenceslist": "Zoznam predvolieb",
+	"action-preferenceslist": "zobraziť predvoľby všetkých používateľov",
+	"preferenceslist-csv": "Stiahnuť ako CSV",
+	"preferenceslist-nofields": "Neboli vybrané žiadne polia.",
+	"right-preferenceslist": "Otvoriť stránku Special:PreferencesList"
+}
