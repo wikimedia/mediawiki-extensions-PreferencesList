@@ -109,7 +109,7 @@ class PreferencesListUtils {
 
 		$services = MediaWikiServices::getInstance();
 		if ( $format === PreferencesList::CSV ) {
-			if ( version_compare( MW_VERSION, '1.46', '>=' ) ) {
+			if ( version_compare( MW_VERSION, '1.47', '>=' ) ) {
 				$fakeLinkRenderer = new FakeLinkRenderer(
 					$services->getTitleFormatter(),
 					$services->getLinkCache(),
@@ -119,6 +119,22 @@ class PreferencesListUtils {
 					$services->getTempUserDetailsLookup(),
 					$services->getUserIdentityLookup(),
 					$services->getUserNameUtils(),
+					$services->getUrlUtils(),
+					new ServiceOptions( LinkRenderer::CONSTRUCTOR_OPTIONS ),
+					false
+				);
+			} elseif ( version_compare( MW_VERSION, '1.46', '>=' ) ) {
+				// @phan-suppress-next-line PhanParamTooFew
+				$fakeLinkRenderer = new FakeLinkRenderer(
+					$services->getTitleFormatter(),
+					$services->getLinkCache(),
+					$services->getSpecialPageFactory(),
+					$services->getHookContainer(),
+					$services->getTempUserConfig(),
+					$services->getTempUserDetailsLookup(),
+					$services->getUserIdentityLookup(),
+					$services->getUserNameUtils(),
+					// @phan-suppress-next-line PhanTypeMismatchArgumentReal
 					new ServiceOptions( LinkRenderer::CONSTRUCTOR_OPTIONS, [ 'renderForComment' => false ] )
 				);
 			} else {
